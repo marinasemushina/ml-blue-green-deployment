@@ -3,30 +3,7 @@
 Проект демонстрирует стратегию Blue-Green Deployment для ML модели с использованием Docker, FastAPI и Nginx.
 
 ## Структура проекта
-ml-blue-green-deployment/
-├── app/ # Приложение FastAPI
-│ ├── main.py # Основное приложение
-│ ├── requirements.txt # Зависимости Python
-│ ├── create_model.py # Создание моделей
-│ ├── iris_classifier_v1.pkl # Модель Blue (v1.0.0)
-│ ├── iris_classifier_v2.pkl # Модель Green (v1.1.0)
-│ ├── iris_classifier_blue.pkl # Ссылка на Blue модель
-│ └── iris_classifier_green.pkl # Ссылка на Green модель
-├── nginx/ # Конфигурация балансировщика
-│ ├── nginx.conf # Активная конфигурация
-│ ├── nginx.blue.conf # Конфигурация для Blue
-│ ├── nginx.green.conf # Конфигурация для
-
-напиши что пишем в редми
-Вот полный текст для README.md файла. Создайте его командой:
-
-bash
-cat > README.md << 'EOF'
-# Blue-Green Deployment для ML модели классификации ирисов
-
-Проект демонстрирует стратегию Blue-Green Deployment для ML модели с использованием Docker, FastAPI и Nginx.
-
-## Структура проекта
+```
 ml-blue-green-deployment/
 ├── app/ # Приложение FastAPI
 │ ├── main.py # Основное приложение
@@ -48,7 +25,7 @@ ml-blue-green-deployment/
 ├── test_client.py # Тестовый клиент
 └── README.md # Документация
 
-text
+```
 
 ## Быстрый старт
 
@@ -56,19 +33,23 @@ text
 ```bash
 cd app
 pip install -r requirements.txt
-2. Создание моделей
-bash
+```
+### 2. Создание моделей
+```bash
 cd app
 python3 create_model.py
 cd ..
-3. Запуск сервисов
-bash
+```
+### 3. Запуск сервисов
+```
 ./deploy_control.sh start
-4. Проверка работы
-bash
+```
+### 4. Проверка работы
+```
 ./deploy_control.sh test
-5. Управление деплоем
-bash
+```
+### 5. Управление деплоем
+```
 # Переключить на Green
 ./deploy_control.sh switch-to-green
 
@@ -77,19 +58,21 @@ bash
 
 # Остановить все
 ./deploy_control.sh stop
-API эндпоинты
+```
+### API эндпоинты
 GET /health - проверка работоспособности
 
 POST /predict - предсказание класса ириса
 
 GET /model-info - информация о модели
 
-Примеры запросов
-Проверка здоровья
-bash
+### Примеры запросов
+### Проверка здоровья
+```
 curl http://localhost:8088/health
-Предсказание
-bash
+```
+### Предсказание
+```
 curl -X POST http://localhost:8088/predict \
   -H "Content-Type: application/json" \
   -d '{
@@ -98,14 +81,17 @@ curl -X POST http://localhost:8088/predict \
     "petal_length": 1.4,
     "petal_width": 0.2
   }'
-Мониторинг
+```
+### Мониторинг
+
 Логи Blue: ./deploy_control.sh logs blue
 
 Логи Green: ./deploy_control.sh logs green
 
 Логи Nginx: ./deploy_control.sh logs nginx
 
-CI/CD Pipeline
+### CI/CD Pipeline
+
 Проект включает GitHub Actions workflow для автоматического тестирования и деплоя. При пуше в ветку main:
 
 Запускаются тесты модели
@@ -116,49 +102,31 @@ CI/CD Pipeline
 
 Симулируется процесс деплоя
 
-Blue-Green стратегия
-Blue версия (v1.0.0)
+### Blue-Green стратегия
+
+#### Blue версия (v1.0.0)
+
 RandomForest с 100 деревьями
 
 max_depth=3
 
 Порт: 8081
 
-Green версия (v1.1.0)
+### Green версия (v1.1.0)
+
 Улучшенный RandomForest с 200 деревьями
 
 max_depth=5
 
 Порт: 8082
 
-Переключение трафика
+### Переключение трафика
+
 По умолчанию трафик идет на Blue
 
 Для переключения на Green: ./deploy_control.sh switch-to-green
 
 Для отката на Blue: ./deploy_control.sh switch-to-blue
 
-Требования
-Docker 20.10+
-
-Docker Compose 2.0+
-
-Python 3.11+
-
-2GB свободной RAM
-
-Автор
-Проект выполнен в рамках задания по автоматизированному развертыванию ML моделей.
-
-## Скриншоты работы
-
-Скриншоты работы проекта находятся в папке [screenshots](screenshots/) и описаны в файле [SCREENSHOTS.md](SCREENSHOTS.md).
-
-### Краткое описание:
-1. **Все Docker контейнеры запущены** (3 контейнера: Blue, Green, Nginx)
-2. **Blue версия (v1.0.0)** отвечает корректно
-3. **Предсказание через Blue версию** работает
-4. **Green версия (v1.1.0)** отвечает корректно  
-5. **Переключение трафика на Green** выполняется успешно
-
-Проект демонстрирует полный цикл Blue-Green Deployment с возможностью переключения между версиями и отката.
+### Скриншоты работы
+Скриншоты работы проекта находятся в папке screenshots и описаны в файле SCREENSHOTS.md.
