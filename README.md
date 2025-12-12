@@ -129,4 +129,4 @@ max_depth=5
 Для отката на Blue: ./deploy_control.sh switch-to-blue
 
 ### Скриншоты работы
-Скриншоты работы проекта находятся в папке screenshots и описаны в файле SCREENSHOTS.md.
+Скриншоты работы проекта находятся в папке screenshots
